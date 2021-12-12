@@ -1,0 +1,256 @@
+
+<div class="row d-flex justify-content-between p-5">
+  <flatfile-button
+    class="flatfile-button"
+    [settings]="settings"
+    [customer]="customer"
+    [licenseKey]="licenseKey"
+    [onData]="onData.bind(this)"
+
+  >
+    Upload CSV file
+  </flatfile-button>
+  <button class="btn btn-primary" (click)="openModalAddRecord(addRecordModal)">Add record</button>
+</div>
+
+<div class="example-container mat-elevation-z8">
+
+<mat-table [dataSource]="dataSource"  matSort>
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="Hauptartikelnr">
+    <mat-header-cell   *matHeaderCellDef> Hauptartikelnr </mat-header-cell >
+    <mat-cell  *matCellDef="let element"> {{element.Hauptartikelnr}} </mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="Artikelname">
+    <mat-header-cell   *matHeaderCellDef> Artikelname </mat-header-cell >
+    <mat-cell  *matCellDef="let element"> {{element.Artikelname}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Hersteller">
+    <mat-header-cell   *matHeaderCellDef> Hersteller </mat-header-cell >
+    <mat-cell *matCellDef="let element"> {{element.Hersteller}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Beschreibung">
+    <mat-header-cell  mat-header-cell *matHeaderCellDef> Beschreibung </mat-header-cell >
+    <mat-cell *matCellDef="let element"> {{element.Beschreibung}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Materialangaben">
+    <mat-header-cell   *matHeaderCellDef> Materialangaben </mat-header-cell >
+    <mat-cell  *matCellDef="let element"> {{element.Materialangaben}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Geschlecht">
+    <mat-header-cell   *matHeaderCellDef> Geschlecht </mat-header-cell >
+    <mat-cell mat-cell *matCellDef="let element"> {{element.Geschlecht}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Produktart">
+    <mat-header-cell  *matHeaderCellDef> Produktart </mat-header-cell >
+    <mat-cell *matCellDef="let element"> {{element.Produktart}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Armel">
+    <mat-header-cell   *matHeaderCellDef> Armel </mat-header-cell >
+    <mat-cell  *matCellDef="let element"> {{element.Armel}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Bein">
+    <mat-header-cell   *matHeaderCellDef> Bein </mat-header-cell >
+    <mat-cell  *matCellDef="let element"> {{element.Bein}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Kragen">
+    <mat-header-cell  *matHeaderCellDef> Kragen </mat-header-cell >
+    <mat-cell  *matCellDef="let element"> {{element.Kragen}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="Herstellung">
+    <mat-header-cell   *matHeaderCellDef> Herstellung </mat-header-cell >
+    <mat-cell  *matCellDef="let element"> {{element.Herstellung}} </mat-cell>
+  </ng-container>
+
+
+  <ng-container matColumnDef="Taschenart">
+    <mat-header-cell   *matHeaderCellDef> Taschenart </mat-header-cell >
+    <mat-cell *matCellDef="let element"> {{element.Taschenart}} </mat-cell>
+  </ng-container>
+
+
+  <ng-container matColumnDef="Grammatur">
+    <mat-header-cell   *matHeaderCellDef> Grammatur </mat-header-cell >
+    <mat-cell *matCellDef="let element"> {{element.Grammatur}} </mat-cell>
+  </ng-container>
+
+
+
+  <ng-container matColumnDef="Material">
+    <mat-header-cell   *matHeaderCellDef> Material </mat-header-cell >
+    <mat-cell *matCellDef="let element"> {{element.Material}} </mat-cell>
+  </ng-container>
+
+
+
+  <ng-container matColumnDef="Ursprungsland">
+    <mat-header-cell  *matHeaderCellDef> Ursprungsland </mat-header-cell >
+    <mat-cell  *matCellDef="let element"> {{element.Ursprungsland}} </mat-cell>
+  </ng-container>
+
+
+  <ng-container matColumnDef="Bildname">
+    <mat-header-cell  *matHeaderCellDef> Bildname </mat-header-cell>
+    <mat-cell  *matCellDef="let element"> {{element.Bildname}} </mat-cell>
+  </ng-container>
+
+
+
+  <mat-header-row  *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row  *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+</mat-table>
+
+  <mat-paginator #paginator [pageSizeOptions]="[100, 5 , 10]"
+                 showFirstLastButtons></mat-paginator>
+
+</div>
+
+<div class="d-flex justify-content-center modal-dialog modal-dialog-centered">
+  <ng-template #addRecordModal let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Add record</h4>
+      <button (click)="c('Close click')" class="close" type="button">×</button>
+    </div>
+    <div class="modal-body justify-content-center">
+      <form class="form" id="kt_form_1" [formGroup]="recordsForm">
+        <div class="form-group row">
+          <label class="col-form-label text-right col-lg-3 col-sm-12">Hauptartikelnr</label>
+          <div class="col-lg-9 col-md-9 col-sm-12">
+            <input type="number" class="form-control" formControlName="Hauptartikelnr"  />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-form-label text-right col-lg-3 col-sm-12">Artikelname</label>
+          <div class="col-lg-9 col-md-9 col-sm-12">
+            <input type="text" class="form-control" formControlName="Artikelname"  />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label text-right col-lg-3 col-sm-12">Hersteller</label>
+          <div class="col-lg-9 col-md-9 col-sm-12">
+            <input type="text" class="form-control" formControlName="Hersteller"/>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label text-right col-lg-3 col-sm-12">Beschreibung</label>
+          <div class="col-lg-9 col-md-9 col-sm-12">
+            <textarea class="form-control" formControlName="Beschreibung" rows="3" style="resize: none"></textarea>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label text-right col-lg-3 col-sm-12">Materialangaben</label>
+          <div class="col-lg-9 col-md-9 col-sm-12">
+            <input type="text" class="form-control" formControlName="Materialangaben"  />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label text-right col-lg-3 col-sm-12">Geschlecht</label>
+          <div class="col-lg-9 col-md-9 col-sm-12">
+            <select class="form-control" formControlName="Geschlecht" name="option">
+              <option value="Herren" [selected]="true">Herren</option>
+              <option value="Damen">Damen</option>
+              <option value="Kinder">Kinder</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label text-right col-lg-3 col-sm-12">Produktart</label>
+          <div class="col-lg-9 col-md-9 col-sm-12">
+            <input type="text" class="form-control" formControlName="Produktart"  />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label text-right col-lg-3 col-sm-12">Armel</label>
+          <div class="col-lg-9 col-md-9 col-sm-12">
+            <input type="text" class="form-control" formControlName="Armel"  />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label text-right col-lg-3 col-sm-12">Bein</label>
+          <div class="col-lg-9 col-md-9 col-sm-12">
+            <input type="text" class="form-control" formControlName="Bein"  />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label text-right col-lg-3 col-sm-12">Kragen</label>
+          <div class="col-lg-9 col-md-9 col-sm-12">
+            <input type="text" class="form-control" formControlName="Kragen"  />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label text-right col-lg-3 col-sm-12">Herstellung</label>
+          <div class="col-lg-9 col-md-9 col-sm-12">
+            <input type="text" class="form-control" formControlName="Herstellung"  />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label text-right col-lg-3 col-sm-12">Taschenart</label>
+          <div class="col-lg-9 col-md-9 col-sm-12">
+            <input type="text" class="form-control" formControlName="Taschenart"  />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label text-right col-lg-3 col-sm-12">Grammatur</label>
+          <div class="col-lg-9 col-md-9 col-sm-12">
+            <input type="text" class="form-control" formControlName="Grammatur"  />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label text-right col-lg-3 col-sm-12">Material</label>
+          <div class="col-lg-9 col-md-9 col-sm-12">
+            <input type="text" class="form-control" formControlName="Material"  />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label text-right col-lg-3 col-sm-12">Ursprungsland</label>
+          <div class="col-lg-9 col-md-9 col-sm-12">
+            <input type="text" class="form-control" formControlName="Ursprungsland"  />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-form-label text-right col-lg-3 col-sm-12">Bildname</label>
+          <div class="col-lg-9 col-md-9 col-sm-12">
+            <input type="text" class="form-control" formControlName="Bildname"  />
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-footer d-flex justify-content-between">
+      <button (click)="c('Close click')" class="btn btn-primary" type="button">
+        Cancel
+      </button>
+      <button
+        class="btn btn-primary"
+        type="button"
+        (click)="addRecord()"
+      >
+        Submit
+      </button>
+    </div>
+  </ng-template>
+</div>
+
+<div style="margin-bottom: 70px">
+  <div echarts [options]="optionsBar" theme="macarons" class="chart"></div>
+</div>
+<div>
+  <div echarts [options]="optionsPie" theme="macarons" class="chart"></div>
+</div>
+
+
+

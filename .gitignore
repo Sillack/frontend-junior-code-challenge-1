@@ -1,0 +1,12 @@
+# dependencies
+/node_modules
+
+# IDEs and editors
+/.idea
+
+# e2e
+/e2e/*.js
+/e2e/*.map
+
+# compiled output
+/dist
